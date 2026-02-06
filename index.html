@@ -25,16 +25,16 @@ body { margin: 0; padding: 0; }
       map.addSource('uw-tiles', {
         type: 'raster',
         tiles: [
-          'https://billyle157.github.io/Map-Design-and-Tiles-Generation/assets/{z}/{x}/{y}.png'
+          'https://billyle157.github.io/Map-Design-and-Tiles-Generation/assets/basemap/{z}/{x}/{y}.png'
         ],
         tileSize: 256,
-        attribution: 'Map tiles designed by Bo Zhao'
+        attribution: 'Map tiles designed by Billy Le'
       });
     
       map.addLayer({
-        id: 'uw',
+        id: 'basemap',
         type: 'raster',
-        source: 'uw-tiles',
+        source: 'basemap-tiles',
         layout: {
           // 'visibility': 'none'
           // Uncomment the line above to hide this layer on initial load.
