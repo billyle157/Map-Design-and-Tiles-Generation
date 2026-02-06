@@ -1,48 +1,173 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Display a map on a webpage</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.js"></script>
-<style>
-body { margin: 0; padding: 0; }
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-</style>
-</head>
-<body>
-<div id="map"></div>
-<script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYmlsbHlsZTE1NyIsImEiOiJjbWt5bHI1bTAwOGZiM2ZxOTdmOWp6dWVnIn0.4ZUF3wy7ao2zfVwCWGjRbA';
-    const map = new mapboxgl.Map({
-        container: 'map', // container ID
-        center: [-122.33, 47.65], // starting position [lng, lat]. Note that lat must be set between -90 and 90
-        zoom: 11 // starting zoom
-    });
-
-    map.on('load', () => {
-      map.addSource('basemap-tiles', {
-        type: 'raster',
-        tiles: [
-          'https://billyle157.github.io/Map-Design-and-Tiles-Generation/assets/basemap/{z}/{x}/{y}.png'
-        ],
-        tileSize: 256,
-        attribution: 'Map tiles designed by Billy Le'
-      });
     
-      map.addLayer({
-        id: 'basemap',
-        type: 'raster',
-        source: 'basemap-tiles',
-        layout: {
-          // 'visibility': 'none'
-          // Uncomment the line above to hide this layer on initial load.
-          // This is useful when you add multiple tile layers.
+<head>
+    <meta charset="utf-8">
+    <title>Display a map on a webpage</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.18.1/mapbox-gl.js"></script>
+    
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    
+        #menu {
+            background: #fff;
+            position: absolute;
+            z-index: 1;
+            top: 10px;
+            right: 10px;
+            border-radius: 3px;
+            width: 120px;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            font-family: 'Open Sans', sans-serif;
         }
-      });
-    });
-</script>
+    
+        /* each layer on the menu */
+        #menu a {
+            font-size: 13px;
+            color: #404040;
+            display: block;
+            margin: 0;
+            padding: 0;
+            padding: 10px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+    
+        /* the last item of the layer items will not include a seperator */
+        #menu a:last-child {
+            border: none;
+        }
+    
+        /* change color and background color while a pointer is on an hybrid link. */
+        #menu a:hover {
+            background-color: #f8f8f8;
+            color: #404040;
+        }
+    
+        #menu a.active {
+            background-color: #3887be;
+            color: #ffffff;
+        }
+    
+        #menu a.active:hover {
+            background: #3074a4;
+        }
+    </style>
+</head>
 
+<body>
+    <nav id="menu"></nav>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 
+            'pk.eyJ1IjoiYmlsbHlsZTE1NyIsImEiOiJjbWt5bHI1bTAwOGZiM2ZxOTdmOWp6dWVnIn0.4ZUF3wy7ao2zfVwCWGjRbA';
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            center: [-122.33, 47.65], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+            zoom: 11 // starting zoom
+        });
+    
+        map.on('load', () => {
+            
+          map.addSource('basemap-tiles', {
+            type: 'raster',
+            tiles: [
+              'https://billyle157.github.io/Map-Design-and-Tiles-Generation/assets/basemap/{z}/{x}/{y}.png'
+            ],
+            tileSize: 256,
+            attribution: 'Map tiles designed by Billy Le'
+          });
+
+            map.addSource('thematicPark-tiles', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/thematicPark/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles designed by Billy Le'
+            });
+        
+            map.addLayer({
+                id: 'basemap',
+                type: 'raster',
+                source: 'basemap-tiles',
+                layout: {
+                    'visibility': 'none'
+                  // Uncomment the line above to hide this layer on initial load.
+                  // This is useful when you add multiple tile layers.
+                }
+            });
+
+            map.addLayer({
+                'id': 'thematicPark',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'thematicPark-tiles'
+            });
+
+        });
+
+        // After the last frame rendered before the map enters an "idle" state.
+        map.on('idle', () => {
+            // If these two layers were not added to the map, abort
+            if (!map.getLayer('basemap') || !map.getLayer('thematicMap')) {
+                return;
+            }
+    
+            // Enumerate ids of the layers.
+            const toggleableLayerIds = ['basemap', 'thematicMap'];
+    
+            // Set up the corresponding toggle button for each layer.
+            for (const id of toggleableLayerIds) {
+                // Skip layers that already have a button set up.
+                if (document.getElementById(id)) {
+                    continue;
+                }
+    
+                // Create a link.
+                const link = document.createElement('a');
+                link.id = id;
+                link.href = '#';
+                link.textContent = id;
+                link.className = 'inactive';
+    
+                link.onclick = function (e) {
+                    const clickedLayer = this.textContent;
+                    e.preventDefault();
+                    e.stopPropagation();
+    
+                    const visibility = map.getLayoutProperty(
+                        clickedLayer,
+                        'visibility'
+                    );
+                
+                     // Toggle layer visibility by changing the layout object's visibility property.
+                    // if it is currently visible, after the clicking, it will be turned off.
+                    if (visibility === 'visible') {
+                        map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+                        this.className = '';
+                    } else { //otherise, it will be turned on.
+                        this.className = 'active';
+                        map.setLayoutProperty(
+                            clickedLayer,
+                            'visibility',
+                            'visible'
+                        );
+                    }
+                };
+
+                // in the menu place holder, insert the layer links.
+                const layers = document.getElementById('menu');
+                layers.appendChild(link);
+            }
+        });
+    </script>
 </body>
+
 </html>
