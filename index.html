@@ -116,12 +116,12 @@
         // After the last frame rendered before the map enters an "idle" state.
         map.on('idle', () => {
             // If these two layers were not added to the map, abort
-            if (!map.getLayer('basemap') || !map.getLayer('thematicMap')) {
+            if (!map.getLayer('basemap') || !map.getLayer('thematicPark')) {
                 return;
             }
     
             // Enumerate ids of the layers.
-            const toggleableLayerIds = ['basemap', 'thematicMap'];
+            const toggleableLayerIds = ['basemap', 'thematicPark'];
     
             // Set up the corresponding toggle button for each layer.
             for (const id of toggleableLayerIds) {
