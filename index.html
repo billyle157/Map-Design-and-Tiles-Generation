@@ -17,6 +17,7 @@ body { margin: 0; padding: 0; }
     mapboxgl.accessToken = 'pk.eyJ1IjoiYmlsbHlsZTE1NyIsImEiOiJjbWt5bHI1bTAwOGZiM2ZxOTdmOWp6dWVnIn0.4ZUF3wy7ao2zfVwCWGjRbA';
     const map = new mapboxgl.Map({
         container: 'map', // container ID
+        style: 'mapbox://styles/mapbox/light-v11'
         center: [-122.3, 47.65], // starting position [lng, lat]. Note that lat must be set between -90 and 90
         zoom: 11 // starting zoom
     });
