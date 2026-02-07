@@ -73,16 +73,25 @@
     
         map.on('load', () => {
             
-          map.addSource('basemap-tiles', {
-            type: 'raster',
-            tiles: [
-              'https://billyle157.github.io/Map-Design-and-Tiles-Generation/assets/basemap/{z}/{x}/{y}.png'
-            ],
-            tileSize: 256,
-            attribution: 'Map tiles designed by Billy Le'
-          });
+            map.addSource('basemap-tiles', {
+                type: 'raster',
+                tiles: [
+                  'https://billyle157.github.io/Map-Design-and-Tiles-Generation/assets/basemap/{z}/{x}/{y}.png'
+                ],
+                tileSize: 256,
+                attribution: 'Map tiles designed by Billy Le'
+            });
 
-            map.addSource('thematicPark-tiles', {
+            map.addSource('parkRaster-tiles', {
+               type: 'raster',
+               tiles: [
+                   'assets/parkRaster/{z}/{x}/{y}.png'
+               ],
+               tileSize: 256,
+               attribution: 'Map tiles by Billy Le'
+            });
+            
+            map.addSource('thematicPark-tiles', { //combined tiles
                 'type': 'raster',
                 'tiles': [
                     'assets/thematicPark/{z}/{x}/{y}.png'
@@ -101,6 +110,15 @@
                   // This is useful when you add multiple tile layers.
                 }
             });
+
+           map.addLayer({
+               id: 'parkRaster',
+               type: 'raster',
+               source: 'parkRaster-tiles',
+               layout: {
+                   'visibility': 'none'
+               }
+           });
 
             map.addLayer({
                 'id': 'thematicPark',
@@ -121,7 +139,7 @@
             }
     
             // Enumerate ids of the layers.
-            const toggleableLayerIds = ['basemap', 'thematicPark'];
+            const toggleableLayerIds = ['basemap', 'parkRaster', 'thematicPark'];
     
             // Set up the corresponding toggle button for each layer.
             for (const id of toggleableLayerIds) {
