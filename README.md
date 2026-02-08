@@ -9,7 +9,8 @@ Parks Raster Thematic Map
 <img width="1919" height="911" alt="image" src="https://github.com/user-attachments/assets/da40b6e0-c26b-4b08-9249-79f5ebe4117b" />
 Combined Base/Thematic Map
 <img width="1919" height="913" alt="image" src="https://github.com/user-attachments/assets/35d166bb-f342-4857-8d65-0dd0f4266450" />
-Research Interest Map
+Research Interest Map (Lunar New Year Theme Map)
+<img width="1906" height="962" alt="image" src="https://github.com/user-attachments/assets/f99cab3d-dbca-40b3-aa54-225e0426658d" />
 
 
 Sources: (Park Raster Data) https://data-seattlecitygis.opendata.arcgis.com/datasets/9baab63b52df417a9b2a168e3f288b1b/about?layer=2
