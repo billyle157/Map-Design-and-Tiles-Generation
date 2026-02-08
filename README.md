@@ -18,3 +18,5 @@ Research Interest Map (Lunar New Year Theme Map)
 Sources: (Park Raster Data) https://data-seattlecitygis.opendata.arcgis.com/datasets/9baab63b52df417a9b2a168e3f288b1b/about?layer=2
 ![Uploading image.png…]()
 
+I used AI in this assignment for debugging only. 
+* Checked if my code was opening up all of the correct files/if files for png was correct.
