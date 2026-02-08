@@ -86,6 +86,13 @@
             center: [-122.33, 47.65], // starting position [lng, lat]. Note that lat must be set between -90 and 90
             zoom: 11 // starting zoom
         });
+
+        const scale = new mapboxgl.ScaleControl({
+            maxWidth: 80,
+            unit: 'imperial' 
+        });
+        
+        map.addControl(scale, 'bottom-left');
     
         map.on('load', () => {
             
