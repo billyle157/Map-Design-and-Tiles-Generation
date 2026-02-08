@@ -1,6 +1,8 @@
 # Map-Design-and-Tiles-Generation
 Lab 4 for Geography 358
 
+In this lab, I checked out the Raster Data for parks within the major Seattle area with available zoom levels 3-14. Map 1 displayed the monochrome basemap that will be used to combine with my thematic map data. For the thematic map data (map 2), I used the parks raster data in the Seattle area, and used that for map 3 combined with my monochrome basemap layer. Lastly, I wanted to make a map that represented a holiday coming up, which is the Lunar New Year, and created a gold and red theme map to display it.
+
 URL Web Map: https://billyle157.github.io/Map-Design-and-Tiles-Generation/
 
 Base Map
@@ -14,3 +16,5 @@ Research Interest Map (Lunar New Year Theme Map)
 
 
 Sources: (Park Raster Data) https://data-seattlecitygis.opendata.arcgis.com/datasets/9baab63b52df417a9b2a168e3f288b1b/about?layer=2
+![Uploading image.png…]()
+
